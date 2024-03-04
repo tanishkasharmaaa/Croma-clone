@@ -2,80 +2,69 @@ import { useState } from "react";
 import { PiTruckLight } from "react-icons/pi";
 import { FaStar } from "react-icons/fa6";
 import { healthfitness } from "../database/healthfitness";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./Element.css";
-
-
-function HealthFitness() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Element.css'
+import { NavLink } from "react-router-dom";
+function Appliances() {
   const [data, setData] = useState(healthfitness);
-
-  // async function datafetch() {
-  //   try {
-  //     const res = await fetch(healthfitness);
-  //     const final = await res.json();
-  //     setData(final);
-  //     console.log(final);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   datafetch();
-  // }, []);
-
-  const handleSortPrice = (value) =>{
+  const [filterValue, setFilterValue] = useState('');
+  const handleSortPrice=(value)=>{
     const sortedData = [...data];
-    if (value === 'low') {
-      sortedData.sort((a, b)=> a.price - b.price);
-    } else if (value === 'high'){
-      sortedData.sort((a, b)=> b.price - a.price);
-    }
-    setData(sortedData);
+  if(value==='low'){
+    sortedData.sort((a,b)=>a.price-b.price)
   }
+  else if(value==='high'){
+    sortedData.sort((a,b)=>b.price-a.price)
+  }
+  setData(sortedData)
+  };
+  const handleFilter = (e) => {
+    setFilterValue(e.target.value);
+  };
 
+  const filteredData = data.filter(ele => ele.title.toLowerCase().includes(filterValue.toLowerCase()));
+ 
   return (
-    <div>
-      <h1>Health</h1>
-      <button onClick={()=>handleSortPrice('low')}>Sort Low To High</button>
-      <button onClick={()=>handleSortPrice('high')}>Sort High To Low</button>
+    <div className="parent" >
+    
+      <h1 >Health & Fitness </h1>
+      <div className="Inputs-div">
+      <button className="low" onClick={()=>handleSortPrice('low')}>Sort low to high</button>
+      <button className="high" onClick={()=>handleSortPrice('high')}>Sort high to low</button>
+      <input
+      className="low"
+      
+          type="text"
+          placeholder="Filter by title"
+          value={filterValue}
+          onChange={handleFilter}
+        />
+      </div>
       <div className="main-product-box">
-        {data.map((ele) => (
-          <div className="element" key={ele.id}>
-            <div>
-              <div className="product">
-                {" "}
-                <img src={ele.img} alt="" />
-              </div>
+      {filteredData.map((ele) => (
+        <div className="element" key={ele.id}>
+          <div>
+            <div className="product"> <img src={ele.img} alt="" /></div>
             </div>
-            <div>
-              <h4>
-                {ele.title}{" "}
-                <span
-                  class="badge text-bg-secondary"
-                  style={{ backgroundColor: "green" }}
-                >
-                  New
-                </span>
-              </h4>
-
-              <p style={{ fontSize: "20px" }}>
-                {ele.stars} <FaStar style={{ color: "green" }} />
-              </p>
-              <p style={{ fontSize: "30px" }}>₹{ele.price.toLocaleString('en-IN')}</p>
-
-              {ele.delivery && (
-                <p>
-                  <PiTruckLight style={{ fontSize: "23px" }} />{" "}
-                  <span>{ele.delivery}</span>
-                </p>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>{" "}
-    </div>
+         <div >
+         <NavLink to={`/health/${ele.id}`} style={{ textDecoration: "none", color: "white" }}>
+  <h4>{ele.title} <span class="badge text-bg-secondary" style={{ backgroundColor: "green" }}>New</span></h4>
+</NavLink>
+          
+          <p style={{fontSize:"20px"}}>{ele.stars} <FaStar style={{color:"green"}}/></p>
+          <p style={{ fontSize: "30px" }}>₹{ele.price}</p>
+          
+          {ele.delivery && (
+            <p >
+              <PiTruckLight style={{ fontSize: "23px" }}/> <span>{ele.delivery}</span>
+            </p>
+          )} 
+        </div></div>
+       
+      ))}
+     
+    </div> </div>
   );
 }
 
-export default HealthFitness;
+export default Appliances;

@@ -1,39 +1,55 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PiTruckLight } from "react-icons/pi";
 import { FaStar } from "react-icons/fa6";
-
+import { gaming } from "../database/gaming";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Element.css'
-function Gaming() {
-  const [data, setData] = useState([]);
-
-  async function datafetch() {
-    try {
-      const res = await fetch(`http://localhost:3031/gaming`);
-      const final = await res.json();
-      setData(final);
-      console.log(final);
-    } catch (error) {
-      console.log(error);
-    }
+import { NavLink } from "react-router-dom";
+function Appliances() {
+  const [data, setData] = useState(gaming);
+  const [filterValue, setFilterValue] = useState('');
+  const handleSortPrice=(value)=>{
+    const sortedData = [...data];
+  if(value==='low'){
+    sortedData.sort((a,b)=>a.price-b.price)
   }
+  else if(value==='high'){
+    sortedData.sort((a,b)=>b.price-a.price)
+  }
+  setData(sortedData)
+  };
+  const handleFilter = (e) => {
+    setFilterValue(e.target.value);
+  };
 
-  useEffect(() => {
-    datafetch();
-  }, []);
-
+  const filteredData = data.filter(ele => ele.title.toLowerCase().includes(filterValue.toLowerCase()));
+ 
   return (
-    <div>
+    <div className="parent" >
     
-      <h1>Gaming</h1>
+      <h1 >Appliances</h1>
+      <div className="Inputs-div">
+      <button className="low" onClick={()=>handleSortPrice('low')}>Sort low to high</button>
+      <button className="high" onClick={()=>handleSortPrice('high')}>Sort high to low</button>
+      <input
+      className="low"
+      
+          type="text"
+          placeholder="Filter by title"
+          value={filterValue}
+          onChange={handleFilter}
+        />
+      </div>
       <div className="main-product-box">
-      {data.map((ele) => (
+      {filteredData.map((ele) => (
         <div className="element" key={ele.id}>
           <div>
             <div className="product"> <img src={ele.img} alt="" /></div>
             </div>
          <div >
-          <h4>{ele.title} <span class="badge text-bg-secondary" style={{backgroundColor:"green"}}>New</span></h4>
+         <NavLink to={`/gaming/${ele.id}`} style={{ textDecoration: "none", color: "white" }}>
+  <h4>{ele.title} <span class="badge text-bg-secondary" style={{ backgroundColor: "green" }}>New</span></h4>
+</NavLink>
           
           <p style={{fontSize:"20px"}}>{ele.stars} <FaStar style={{color:"green"}}/></p>
           <p style={{ fontSize: "30px" }}>₹{ele.price}</p>
@@ -51,4 +67,4 @@ function Gaming() {
   );
 }
 
-export default Gaming;
+export default Appliances;

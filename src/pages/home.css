@@ -1,0 +1,65 @@
+
+.financing{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px;
+    
+}
+.posters{
+       display: grid;
+grid-template-columns: repeat(5,1fr);
+align-items: center;
+padding: 20px;
+    }
+.posters>img{
+    width: 80%;
+}
+.adds{
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+@media only screen and (min-width:600px) and  (max-width:700px){
+    .financing{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 15px;
+        
+    }
+    .posters{
+        display: grid;
+ grid-template-columns: repeat(5,1fr);
+     }
+ .posters>img{
+     width: 100%;
+ }
+ .adds{
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+}
+
+@media only screen and (min-width:300px) and  (max-width:600px){
+    .financing{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 15px;
+        
+    }
+    .posters{
+        display: grid;
+ grid-template-columns: repeat(5,1fr);
+     }
+ .posters>img{
+     width: 100%;
+ }
+
+ .adds{
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+}
+

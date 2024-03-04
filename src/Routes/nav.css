@@ -1,82 +1,87 @@
+
 .main-nav{
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    justify-content: space-around;
- padding-top: 10px;
- padding-bottom: 10px;
-  width: 100%;
-  border: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
-
-
-
-.search-bar>input{
-padding: 10px;
-border: none;
-width: 500px;
-
-
-}
-.users{
+.user{
     /* border: 1px solid white; */
-    width: 40px;
-   align-items: center;
-   text-align: center;
-   margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .user{
+  font-size: 30px;
+ }
+ .logo{
+width: 100%;
+
+ }
+.search{
+  width: 100%;
+  border-radius: 20px;
+  padding: 8px;
 }
 .nav-bar-second{
     background-color: rgb(24, 24, 24);
     padding: 10px;
 }
-.menu-link{
-  display: flex; 
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  justify-content: space-around; 
-}
 
-@media only screen and (max-width: 768px) {
-    .main-nav{
-        background-color: black;
-        display: flex;
-        justify-content: center;
-        justify-content: space-around;
-     padding-top: 10px;
-     padding-bottom: 10px;
-      width: 100%;
-      border:none;
-    }
-    
-    
-    
-    .search-bar>input{
+
+@media only screen and (min-width:600px) and  (max-width:700px){
+  .main-nav{
+    display: flex;
+    justify-content: space-around;
     padding: 10px;
-    border: none;
-    width:300px;
+  }
+  .user{
+      /* border: 1px solid white; */
+      display: flex;
+      justify-content: space-between;
+}
+.user{
+  font-size: 30px;
+ }
+   .logo{
+  width: 100%;
+  
+   }
+  .search{
+    width: 100%;
+    border-radius: 20px;
+    padding: 5px;
+  }
+  .nav-bar-second{
+      background-color: rgb(24, 24, 24);
+      padding: 10px;
+  }
+  
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    .main-nav {
+      display: flex;
+      justify-content: space-around;
+    }
+  
+    .user {
+      font-size: 30px;
+    }
+  
+    .search {
+      width: 100%;
+    border-radius: 20px;
+
+    }
+  
     
-    
+  
+    .logo {
+      width: 100%;
     }
-    .users{
-        /* border: 1px solid white; */
-        width: 40px;
-       align-items: center;
-       text-align: center;
-       margin-top: 5px;
-       display: flex;
-       justify-content: space-between;
+  
+    .search {
+      width: 50%;
+      border-radius: 20px;
+      font-size: 10px;
     }
-    .nav-bar-second{
-        background-color: rgb(24, 24, 24);
-        padding: 10px;
-    }
-    .menu-link{
-      display: flex; 
-      text-align: center;
-      align-items: center;
-      justify-content: center;
-      justify-content: space-around; 
-    }
-    
+  }
 }
